@@ -1,14 +1,10 @@
-"use client"
+'use client';
 
 import React, { useState, useEffect } from 'react';
-
-import { StockData } from '../types/stock';
-import StockChart from '@/components/StockChart';
+import StockSearch from '@/components/StockSearch';
 import StockOverview from '@/components/StockOverview';
-import { Button } from '@/components/ui/button';
-import { SearchIcon } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import StockList from '@/components/StockList';
+import StockChart from '@/components/StockChart';
+import { StockData } from '../types/stock';
 
 // Mock API function
 const fetchStockData = async (symbol: string): Promise<StockData> => {
@@ -36,52 +32,30 @@ const fetchStockData = async (symbol: string): Promise<StockData> => {
     return data;
   };
 
-const Dashboard: React.FC = () => {
+export default function YahooFinanceApp() {
   const [stocks, setStocks] = useState<StockData[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
-    const initialStocks = JSON.parse(localStorage.getItem('stocks') || '[]');
-    if (initialStocks.length > 0) {
+    const initializeStocks = async () => {
+      const initialStocks = await Promise.all(['AAPL', 'GOOGL', 'MSFT'].map(fetchStockData));
       setStocks(initialStocks);
-    } else {
-      const defaultStocks = ['AAPL', 'GOOGL', 'MSFT'];
-      Promise.all(defaultStocks.map(fetchStockData)).then(setStocks);
-    }
+    };
+    initializeStocks();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('stocks', JSON.stringify(stocks));
-  }, [stocks]);
-
-  const addStock = async () => {
-    if (searchTerm && !stocks.find(stock => stock.symbol === searchTerm)) {
-      const newStock = await fetchStockData(searchTerm);
+  const addStock = async (symbol: string) => {
+    if (!stocks.find(stock => stock.symbol === symbol)) {
+      const newStock = await fetchStockData(symbol);
       setStocks([...stocks, newStock]);
-      setSearchTerm('');
     }
-  };
-
-  const removeStock = (symbol: string) => {
-    setStocks(stocks.filter(stock => stock.symbol !== symbol));
   };
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">Stock Tracker</h1>
-      <div className="flex gap-2 mb-4">
-        <Input
-          placeholder="Search for a stock symbol"
-          value={searchTerm}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value.toUpperCase())}
-        />
-        <Button onClick={addStock}><SearchIcon className="mr-2" /> Search</Button>
-      </div>
-      <div className='border rounded-xl my-4'>
-      <StockList stocks={stocks} onRemoveStock={removeStock} />
-      </div>
+      <StockSearch onSearch={addStock} />
       {stocks.map(stock => (
-        <div key={stock.symbol} className='border rounded-xl p-4 my-4'>
+        <div key={stock.symbol}>
           <StockOverview stock={stock} />
           <StockChart stock={stock} />
         </div>
@@ -90,4 +64,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+// export default YahooFinanceApp;
