@@ -1,33 +1,32 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { SearchIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-interface StockSearchProps {
-  onSearch: (symbol: string) => void;
-}
+const StockSearch: React.FC = () => {
+  const [query, setQuery] = useState('');
+  const router = useRouter();
 
-const StockSearch: React.FC<StockSearchProps> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-
-  const handleSearch = () => {
-    if (searchTerm) {
-      onSearch(searchTerm);
-      setSearchTerm('');
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/stock/${query.toUpperCase()}`);
     }
   };
 
   return (
-    <div className="flex gap-2 mb-4">
+    <form onSubmit={handleSearch} className="flex">
       <Input
-        placeholder="Search for a stock symbol"
-        value={searchTerm}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value.toUpperCase())}
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Enter stock symbol (e.g., AAPL)"
+        className="w-64 mr-2"
       />
-      <Button onClick={handleSearch}><SearchIcon className="mr-2" /> Search</Button>
-    </div>
+      <Button type="submit">Search</Button>
+    </form>
   );
 };
 

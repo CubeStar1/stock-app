@@ -23,15 +23,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => (
     <nav className='p-4'>
       <ul className="space-y-2">
         <li>
-          <a href="#" className="flex items-center space-x-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">
+          <a href="/" className="flex items-center space-x-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">
             <Home className="w-5 h-5" />
             <span>Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="#" className="flex items-center space-x-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">
+          <a href="/watchlist" className="flex items-center space-x-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">
             <TrendingUp className="w-5 h-5" />
             <span>Watchlist</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" className="flex items-center space-x-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">
+            <PieChart className="w-5 h-5" />
+            <span>Portfolio</span>
           </a>
         </li>
         <li>
