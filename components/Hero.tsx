@@ -176,7 +176,7 @@ export default function Component() {
               </div>
             </div>
             <div className="w-full">
-              <LinechartChart className="w-full h-full" />
+              <LinechartChart />
             </div>
           </div>
         </div>
@@ -195,9 +195,9 @@ export default function Component() {
   )
 }
 
-function LinechartChart(props) {
+function LinechartChart() {
   return (
-    <div {...props}>
+    <div >
       <ChartContainer
         config={{
           desktop: {
