@@ -119,7 +119,7 @@ export default function Component() {
             </div>
           </div>
         </div>
-        <div className="mt-8 grid gap-6">
+        <div className="mt-8 grid gap-6 ">
           <div className="bg-card rounded-lg p-6 grid gap-4 shadow-sm">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-bold">Trending Stocks</h2>
@@ -157,10 +157,10 @@ export default function Component() {
               </div>
             </div>
           </div>
-          <div className="bg-card rounded-lg p-6 grid gap-4 shadow-sm">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold">Stock Performance</h2>
-              <div className="flex items-center gap-2">
+          <div className="bg-card rounded-lg p-6 grid gap-4 shadow-sm ">
+            <div className="flex items-center justify-center lg:justify-between">
+              <h2 className="text-lg font-bold hidden lg:block">Stock Performance</h2>
+              <div className="flex items-center gap-2 ">
                 <Button variant="outline" size="sm">
                   1D
                 </Button>
@@ -175,7 +175,7 @@ export default function Component() {
                 </Button>
               </div>
             </div>
-            <div className="w-full">
+            <div >
               <LinechartChart />
             </div>
           </div>

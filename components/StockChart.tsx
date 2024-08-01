@@ -22,7 +22,7 @@ const StockChart: React.FC<StockChartProps> = ({ stock }) => (
             <YAxis domain={['dataMin', 'dataMax']} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="price" stroke="#8884d8" />
+            <Line type="monotone" dataKey="price" stroke="hsl(var(--chart-1))" />
           </LineChart>
         </ResponsiveContainer>
       </CardContent>
