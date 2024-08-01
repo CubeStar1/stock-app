@@ -53,7 +53,7 @@ export default function YahooFinanceApp() {
   return (
     <div className="p-4 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">Stock Tracker</h1>
-      <StockSearch onSearch={addStock} />
+      {/* <StockSearch onSearch={addStock} /> */}
       {stocks.map(stock => (
         <div key={stock.symbol}>
           <StockOverview stock={stock} />
