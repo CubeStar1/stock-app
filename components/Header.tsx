@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => (
       </div>
       </a>
     </div>
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center space-x-4 ">
       <StockSearch />
       <Bell className="w-5 h-5 text-gray-500 cursor-pointer" />
       <User className="w-5 h-5 text-gray-500 cursor-pointer" />
