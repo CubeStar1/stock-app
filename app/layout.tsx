@@ -1,4 +1,4 @@
-"use client";
+
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -7,7 +7,7 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/themeprovider"
 import ModeToggle from "@/components/ThemeSwitcher";
-import { useState } from "react";
+import SidebarComponent from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,35 +21,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   
   return (
     <html lang="en">
       <body className={inter.className}>
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-          <div className="flex h-screen overflow-hidden">
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <Header onMenuClick={toggleSidebar} />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto p-4">
-          {children}
-        </main>
-      </div>
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" 
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
-      )}
-    </div>
-        </ThemeProvider>
+        <SidebarComponent children= {children}/>
       </body>
     </html>
   );

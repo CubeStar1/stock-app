@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => (
-  <header className="flex justify-between items-center p-4 border-b ">
+  <header className="flex justify-between items-center p-4 border-b sticky top-0 backdrop-blur-sm shadow-sm z-50 ">
     <div className="flex items-center">
       <button onClick={onMenuClick} className="mr-4 lg:hidden">
         <Menu className="w-6 h-6" />
