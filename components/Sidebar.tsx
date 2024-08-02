@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Home, TrendingUp, PieChart, Settings, X } from 'lucide-react';
-import Header from "@/components/Header";
-import { ThemeProvider } from './themeprovider';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -60,42 +58,4 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => (
   </aside>
 );
 
-
-
-const SidebarComponent = ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
-  return (
-      <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-          <div className="flex flex-col flex-1 overflow-hidden">
-            
-            <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 pt-0">
-            <Header onMenuClick={toggleSidebar} />
-              {children}
-            </main>
-          </div>
-          {isSidebarOpen && (
-            <div 
-              className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" 
-              onClick={() => setIsSidebarOpen(false)}
-            ></div>
-          )}
-        </div>
-      </ThemeProvider>
-  );
-}
-
-export default SidebarComponent;
+export default Sidebar;
